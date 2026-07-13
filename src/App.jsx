@@ -1,27 +1,18 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
-import { translateWord } from "./services/translationApi";
 
 function App() {
-  useEffect(() => {
-    async function test() {
-      try {
-        const translation = await translateWord("Learn languages through subtitles");
-        console.log("Перевод:", translation);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    test();
-  }, []);
+  const [text, setText] = useState("");
 
   return (
     <div className="app">
-      <h1>Subly</h1>
-      <p>Learn languages through subtitles</p>
+      <input
+        type="text"
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+      />
 
-      <button>Upload subtitles</button>
+      <p>{text}</p>
     </div>
   );
 }
