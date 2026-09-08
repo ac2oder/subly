@@ -2,16 +2,12 @@ import { useState } from "react";
 import { translateWord } from "./services/translationApi";
 import "./App.css";
 import WordCard from "./components/WordCard";
+import { parseSubtitles } from "./services/subtitleParser";
 
 function App() {
   const [text, setText] = useState("");
   const [translation, setTranslation] = useState("");
-
-  const words = [
-    { word: "hello", translation: "привет" },
-    { word: "house", translation: "дом" },
-    { word: "movie", translation: "фильм" },
-  ];
+  const [words, setWords] = useState([]);
 
   function handleChange(event) {
     setText(event.target.value);
@@ -26,14 +22,62 @@ function App() {
     setTranslation(result);
   }
 
+  async function handleFileChange(event) {
+    const file = event.target.files[0];
+    const text = await file.text();
+    const subtitles = parseSubtitles(text);
+
+    const allWords = [];
+
+    for (const subtitle of subtitles) {
+      const words = subtitle.split(" ");
+      allWords.push(...words);
+    }
+
+    const countWord = new Map();
+
+    for (const word of allWords) {
+      const cleanWord = word
+      .toLowerCase()
+      .replace(/[.,!?;:"'()[\]]/g, "");
+
+      if (countWord.get(cleanWord) === undefined) {
+        countWord.set(cleanWord, 1);
+      } else {
+        countWord.set(cleanWord, countWord.get(cleanWord) +1 );
+      }
+    }
+
+    const wordsArray = Array.from(countWord);
+
+    wordsArray.sort((a, b) => {
+      return b[1] - a[1];
+    })
+
+    const wordsData = wordsArray.map(([word, count]) => {
+      return {
+        word: word,
+        count: count
+      };
+    });
+
+    setWords(wordsData);
+  }
+
   return (
     <div className="app">
+      <input
+        type="file"
+        accept=".srt,.vtt"
+        onChange={handleFileChange}
+      />
+
       {words.map((item) => {
         return (
           <WordCard
             key={item.word}
             word={item.word}
-            translation={item.translation}
+            count={item.count}
           />
         );
       })}
