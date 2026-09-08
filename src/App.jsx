@@ -7,6 +7,12 @@ function App() {
   const [text, setText] = useState("");
   const [translation, setTranslation] = useState("");
 
+  const words = [
+    { word: "hello", translation: "привет" },
+    { word: "house", translation: "дом" },
+    { word: "movie", translation: "фильм" },
+  ];
+
   function handleChange(event) {
     setText(event.target.value);
   }
@@ -22,7 +28,15 @@ function App() {
 
   return (
     <div className="app">
-      <WordCard word="beautiful" translation="красивый" />
+      {words.map((item) => {
+        return (
+          <WordCard
+            key={item.word}
+            word={item.word}
+            translation={item.translation}
+          />
+        );
+      })}
 
       <input
         type="text"
