@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  background: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.word-card {
+  padding: 16px;
+  border: 1px solid #333;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background: #333;
+}
+
+.word {
+  margin: 0;
+  font-size: 24px;
+}
+
+.count {
+  margin: 6px 0 0;
+  color: #999;
+}
+
+.file-input {
+  margin-bottom: 20px;
+}
+
+.file-button {
+  display: inline-block;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.file-button:hover {
+  background: #333;
+}
+
+.file-button input {
+  display: none;
+}
+
+.translation-input {
+  padding: 12px 14px;
+  margin-right: 10px;
+  border: 1px solid #444;
+  border-radius: 10px;
+  background: #1e1e1e;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+
+.translation-input:focus {
+  border-color: #666;
+}
+
+.translate-button {
+  padding: 12px 20px;
+  border: 1px solid #444;
+  border-radius: 10px;
+  background: #2a2a2a;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.translate-button:hover {
+  background: #333;
+}
+
+.translation-result {
+  margin-top: 12px;
+  color: #ccc;
+}

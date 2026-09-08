@@ -1,8 +1,8 @@
 function WordCard(props) {
   return (
-    <div>
-      <h2>{props.word}</h2>
-      <p>{props.count}</p>
+    <div className="word-card">
+      <h2 className="word">{props.word}</h2>
+      <p className="count">{props.count} times</p>
     </div>
   );
 }

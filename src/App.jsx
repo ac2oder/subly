@@ -66,11 +66,32 @@ function App() {
 
   return (
     <div className="app">
+      <div className="file-input">
+        <label className="file-button">
+          Choose subtitles
+          <input
+            type="file"
+            accept=".srt,.vtt"
+            onChange={handleFileChange}
+          />
+        </label>
+      </div>
+
       <input
-        type="file"
-        accept=".srt,.vtt"
-        onChange={handleFileChange}
+        className="translation-input"
+        type="text"
+        value={text}
+        onChange={handleChange}
       />
+
+      <button
+        className="translate-button"
+        onClick={handleTranslate}
+      >
+        Translate
+      </button>
+      
+      <p className="translation-result">{translation}</p>
 
       {words.map((item) => {
         return (
@@ -81,17 +102,6 @@ function App() {
           />
         );
       })}
-
-      <input
-        type="text"
-        value={text}
-        onChange={handleChange}
-      />
-
-      <button onClick={handleTranslate}>
-        Translate
-      </button>
-      <p>{translation}</p>
     </div>
   );
 }
