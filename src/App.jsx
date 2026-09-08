@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { translateWord } from "./services/translationApi"
+import { translateWord } from "./services/translationApi";
 import "./App.css";
+import WordCard from "./components/WordCard";
 
 function App() {
   const [text, setText] = useState("");
@@ -11,12 +12,18 @@ function App() {
   }
 
   async function handleTranslate() {
+    if (!text.trim()) {
+      return
+    }
+    
     const result = await translateWord(text);
     setTranslation(result);
   }
 
   return (
     <div className="app">
+      <WordCard word="beautiful" translation="красивый" />
+
       <input
         type="text"
         value={text}
